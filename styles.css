@@ -310,6 +310,7 @@ h1{
     gap: 25px;
     align-items: start;
     justify-items: center;
+    grid-auto-rows: min-content;
 }
 
 h2{
