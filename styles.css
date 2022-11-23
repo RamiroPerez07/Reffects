@@ -237,7 +237,7 @@ li{
 .main-subsection{
     width: 100%;
     height: auto;
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
     max-height: 1980px;
 }
 
