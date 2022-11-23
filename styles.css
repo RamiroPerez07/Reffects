@@ -253,7 +253,7 @@ li{
 }
 
 #hero-left{
-    margin-left: 15%;
+    margin-left: 20%;
     align-self: center;
     display: grid;
     place-items: center;
@@ -328,7 +328,7 @@ h1{
 
 /* Media Queries */
 
-@media (max-width: 1024px){
+@media (max-width: 1140px){
     #hero{
         grid-template-columns: 1fr;
     }
