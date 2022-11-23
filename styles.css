@@ -227,7 +227,7 @@ li{
 #main{
     width: 100%;
     height: auto;
-    min-height: 100vh;
+    min-height: calc(100vh - 60px);
     padding: 0px 20px;
     display: grid;
     align-items: start;
