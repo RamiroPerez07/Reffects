@@ -30,6 +30,7 @@
     --fs-small1: 0.9rem;
     --fs-medium0 : 1rem;
     --fs-medium1 : 1.4rem;
+    --fs-large0: 1.8rem;
     --fs-xlarge0: 3rem;
 
     /* Font Weight */
@@ -45,6 +46,8 @@ html{
     display: grid;
     justify-items: center;
     align-items: start;
+    scroll-behavior: smooth;
+    scroll-padding: 60px;
 }
 
 body{
@@ -298,6 +301,67 @@ h1{
     background-position: center;
     background-size: cover;
 }
+
+/* Product list section */
+
+#products-section{
+    display: grid;
+    padding: 20px;
+    align-items: start;
+    justify-items: center;
+}
+
+h2{
+    font-size: var(--fs-large0);
+    font-weight: var(--fw-normal);
+    color: var(--black);
+    justify-self: start;
+}
+
+#category-section{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 15px;
+    justify-items: center;
+    align-items: center;
+}
+
+.category-card{
+    width:110px;
+    height: 110px;
+    background: linear-gradient(to top, var(--darkRed), var(--black));
+    cursor: pointer;
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+    border-radius: 7px;
+}
+
+.category-card.selected{
+    background: var(--black);
+}
+
+.category-img{
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.category-name{
+    font-size: var(--fs-small1);
+    color: var(--white);
+    text-align: center;
+    font-weight: var(--fw-normal);
+}
+
+
+/* Footer */
 
 #body-footer{
     width: 100%;
