@@ -1,0 +1,33 @@
+/* Reset Styles*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --white: #FDFDFD;
+    --red: #C30F24;
+    --darkRed: #590817;
+    --black: #040102;
+    --grey: #DBCDCF;
+}
+
+html{
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+}
+
+body{
+    width: 100%;
+    max-width: 1980px; /* Max res */
+    height: auto;
+    min-height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+}
