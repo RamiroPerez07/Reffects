@@ -242,13 +242,14 @@ li{
     display: grid;
     align-items: start;
     justify-items: center;
+    grid-auto-rows: min-content;
 }
 
 .main-subsection{
     width: 100%;
     height: auto;
-    min-height: calc(100vh - 60px);
-    max-height: 1980px;
+    max-height: 1080px; /* Limite en los 1080 pixeles */
+    min-height: min(1080px, calc(100vh - 60px));
 }
 
 #hero{
