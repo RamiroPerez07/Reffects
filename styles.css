@@ -398,6 +398,7 @@ h2{
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     background: linear-gradient(45deg, var(--white), var(--grey));
+    box-shadow: 0px 0px 2px -1px var(--black);
 }
 
 .shipping-img{
