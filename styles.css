@@ -422,6 +422,25 @@ h2{
     position: absolute;
     top: 0px;
     right: 15px;
+    animation-name: swinging;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes swinging {
+    0%{
+        transform-origin: top;
+        transform: rotateZ(7deg);
+    }
+    50%{
+        transform-origin: top;
+        transform: rotateZ(-7deg);
+    }
+    100%{
+        transform-origin: top;
+        transform: rotateZ(7deg);
+    }
 }
 
 .product-img{
