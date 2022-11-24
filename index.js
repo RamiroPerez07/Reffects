@@ -86,6 +86,7 @@ function createHtmlProductCard(objProduct){
     return `
     <div class="product-card">
         ${free_shipping?`<div class="shipping-img" style="background-image: url('./img/utils/free-shipping.png')"></div>`:""}
+        ${stock==0?`<div class="out-of-stock-img" style="background-image: url('./img/utils/out-of-stock.png')"></div>`:""}
         <div class="product-img" style="background-image: url('${url_img}')"></div>
         <div class="product-info">
             <h3 class="product-name gradient-text">${name}</h3>

@@ -412,6 +412,17 @@ h2{
     left: 15px;
 }
 
+.out-of-stock-img{
+    height: 60px;
+    width: 60px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 0px;
+    right: 15px;
+}
+
 .product-img{
     width: 140px;
     height: 160px;

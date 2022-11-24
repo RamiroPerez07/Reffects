@@ -162,7 +162,7 @@ const Pedals = [
         url_img: "./img/pedals/nux-dual-delay.png",
         price: 76500,
         free_shipping: true,
-        stock: 2,
+        stock: 0,
     },
     {
         id:16,
@@ -173,7 +173,7 @@ const Pedals = [
         url_img: "./img/pedals/nux-overdrive.png",
         price: 76500,
         free_shipping: true,
-        stock: 2,
+        stock: 0,
     },
     {
         id:17,
@@ -206,7 +206,7 @@ const Pedals = [
         url_img: "./img/pedals/phase100-mxr.png",
         price: 79000,
         free_shipping: true,
-        stock: 1,
+        stock: 0,
     },
     {
         id:20,
