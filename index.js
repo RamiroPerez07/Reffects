@@ -3,6 +3,7 @@ let categoryCards = []
 
 //btns
 const barsMenuBtn = document.getElementById("bars-menu-btn")
+const heroShowProductsBtn = document.getElementById("show-our-products")
 
 //menus
 const navbar = document.getElementById("navbar")
@@ -140,7 +141,8 @@ function init(){
     navbar.addEventListener("click", toggleNavbar);
 
     categoryContainer.addEventListener("click", selectCategory);
-    productsContainer.addEventListener("click", selectProductCard)
+    productsContainer.addEventListener("click", selectProductCard);
+    heroShowProductsBtn.addEventListener("click", function(){window.location.href='#products-section'})
 
 }
 
