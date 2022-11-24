@@ -23,10 +23,11 @@ function closeNavbarMenuOnScroll(){
 }
 
 function createHtmlCategoryCard(objCategory){
+    const {name, url_img} = objCategory;
     return `
-    <div class="category-card">
-        <div class="category-img" style="background-image : url('${objCategory.url_img}')"></div>
-        <span class="category-name">${objCategory.name}</span>
+    <div class="category-card category-selection" data-category = "${name}">
+        <div class="category-img category-selection" style="background-image : url('${url_img}')"></div>
+        <span class="category-name category-selection">${name}</span>
     </div>
     `;
 }
@@ -37,7 +38,6 @@ function loadCategories(Categories){
 }
 
 function removeSelectedCategory(){
-    console.log(categoryCards)
     categoryCards.forEach(card =>{
         if(card.classList.contains("selected")){
             card.classList.remove("selected");
@@ -50,15 +50,20 @@ function setStyleOfSelectedCategory(selectedCategoryCard){
 }
 
 function selectCategory(event){
-    if(!event.target.classList.contains("category-card") && !event.target.parentElement.classList.contains("category-card")) return
-    let selectedCategoryCard
-    if (event.target.classList.contains("category-card")){
-        selectedCategoryCard = event.target
-    }else if(event.target.parentElement.classList.contains("category-card")){
-        selectedCategoryCard = event.target.parentElement
-    }
+    if (!event.target.classList.contains("category-selection")) return;
+    const selectedCategoryCard = event.target.closest(".category-card")
+    const selectedCategory = selectedCategoryCard.dataset.category.toString().toLowerCase();
     removeSelectedCategory();
     setStyleOfSelectedCategory(selectedCategoryCard);
+    const productsFilteredByTag = getProductByCategory(selectedCategory);
+    renderProducts(productsFilteredByTag);
+}
+
+function getProductByCategory(tag){
+    const productsFilteredByTag = Pedals.filter(objPedal =>{
+        return objPedal.fxs.includes(tag);
+    })
+    return productsFilteredByTag;
 }
 
 /*----------------Renderización de elementos--------------- */
@@ -102,8 +107,8 @@ function createHtmlProductCard(objProduct){
     `;
 }
 
-function renderProducts(){
-    const html = Pedals.map(createHtmlProductCard).join("");
+function renderProducts(arrayOfProducts){
+    const html = arrayOfProducts.map(createHtmlProductCard).join("");
     productsContainer.innerHTML = html;
 }
 
@@ -127,7 +132,7 @@ function init(){
         loadCategories(Categories);
         categoryCards = document.getElementsByClassName("category-card");
         categoryCards = [...categoryCards] //convierto a array de elementos
-        renderProducts();
+        renderProducts(Pedals);
     })
 
     barsMenuBtn.addEventListener("click", toggleNavbar);
