@@ -87,9 +87,9 @@ function createHtmlProductCard(objProduct){
             <div class="fx-container">
                 ${createFxTags(fxs)}
             </div>
-            <div class="description-toggle">
-                <p class="description-title">Description</p>
-                <div class="icon-arrow-down" style="background-image: url('./img/utils/icon-arrow-down.svg')"></div>
+            <div class="description-toggle show-product-description">
+                <p class="description-title show-product-description">Description</p>
+                <div class="icon-arrow-down show-product-description" style="background-image: url('./img/utils/icon-arrow-down.svg')"></div>
             </div>
             <p class="product-description">${description}</p>
             <div class="separator"></div>
@@ -107,6 +107,21 @@ function renderProducts(){
     productsContainer.innerHTML = html;
 }
 
+function selectProductCard(event){
+    if (event.target.classList.contains("show-product-description")){
+        //obtengo la card en cuestion (o sea la seleccionada)
+        const card = event.target.closest(".product-card");
+        //con la card obtengo la descripción (texto)
+        const description = card.querySelector(".product-description");
+        //alterno la clase de la descripcion para que se muestre o no
+        description.classList.toggle("visible");
+        //con la card obtengo la flechita y la animo con la fx rotateArrow
+        const arrow = card.querySelector(".icon-arrow-down");
+        //alterno la clase de la flecha para que cambie entre vista hacia arriba y hacia abajo
+        arrow.classList.toggle("look-up");
+    }
+}
+
 function init(){
     window.addEventListener("DOMContentLoaded", function(){
         loadCategories(Categories);
@@ -119,7 +134,8 @@ function init(){
     window.addEventListener("scroll", closeNavbarMenuOnScroll);
     navbar.addEventListener("click", toggleNavbar);
 
-    categoryContainer.addEventListener("click", selectCategory)
+    categoryContainer.addEventListener("click", selectCategory);
+    productsContainer.addEventListener("click", selectProductCard)
 
 }
 
