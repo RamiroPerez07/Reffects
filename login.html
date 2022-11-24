@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Reffects</title>
+    <!-- Styles from the main document-->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="frame-container">
+        <div class="user-form-window-frame">
+            <div class="user-icon"></div>
+            <form class="user-form" action="./index.html" novalidate>
+                <div class="form-field">
+                    <input class="input-style1 signin-form-input" type="text" name="username-input" id="username-input" placeholder="Username">
+                    <small class="user-error-msg">Mensaje de error de ejemplo</small>
+                </div>
+                <div class="form-field">
+                    <input class="input-style1 signin-form-input" type="password" name="password-input" id="password-input" placeholder="Password">
+                    <small class="user-error-msg">Mensaje de error de ejemplo 2</small>
+                </div>
+                <button class="btn-style-dark login-btn">Login</button>
+                <p>Not a member? <a class="go-to-user-form-btn" href="./signup.html">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="./login.js"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ let categoryCards = []
 //btns
 const barsMenuBtn = document.getElementById("bars-menu-btn")
 const heroShowProductsBtn = document.getElementById("show-our-products")
+const userIcon = document.getElementById("user-icon");
 
 //menus
 const navbar = document.getElementById("navbar")
@@ -141,6 +142,7 @@ function init(){
     barsMenuBtn.addEventListener("click", toggleNavbar);
     window.addEventListener("scroll", closeNavbarMenuOnScroll);
     navbar.addEventListener("click", toggleNavbar);
+    userIcon.addEventListener("click", function(){window.location.href="./login.html"})
 
     categoryContainer.addEventListener("click", selectCategory);
     productsContainer.addEventListener("click", selectProductCard);
