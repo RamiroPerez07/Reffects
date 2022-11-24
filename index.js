@@ -133,6 +133,7 @@ function init(){
         loadCategories(Categories);
         categoryCards = document.getElementsByClassName("category-card");
         categoryCards = [...categoryCards] //convierto a array de elementos
+        setStyleOfSelectedCategory(categoryCards[0])
         renderProducts(Pedals);
     })
 
