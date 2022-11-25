@@ -9,7 +9,7 @@ const shoppingCartBtn = document.getElementById("shopping-cart-icon");
 const cartExitBtn = document.getElementById("cart-exit-btn")
 
 //menus
-const navbar = document.getElementById("navbar");
+const navbar = document.getElementById("navbar-list");
 
 //frames
 const shoppingCartBg = document.getElementById("shopping-cart-bg");
@@ -139,7 +139,7 @@ function selectProductCard(event){
 
 function toggleShoppingCart(){
     shoppingCartBg.classList.toggle("show-bg");
-    shoppingCart.classList.toggle("open-cart")
+    shoppingCart.classList.toggle("open-cart");
 }
 
 function init(){
