@@ -14,53 +14,56 @@
     <!--#####################################-->
 
     <header id="body-header">
-        <!-- Se genera el contenedor relative reference ya que el header tiene position sticky y no funca con absolute-->
-        <div class="relative-reference"> 
-            <div id="header-logo"></div>
-            <nav id="navbar">
-                <ul id="navbar-list">
-                    <li class="list-item">
-                        <a href="#hero">Home</a>
-                    </li>
-                    <li class="list-item">
-                        <a href="#products-section">Fx Pedals</a>
-                    </li>
-                    <li class="list-item">
-                        <i id="user-icon" class="fa fa-user" aria-hidden="true"></i>
-                    </li>
-                </ul>
-                <i id="shopping-cart-icon" class="fa-sharp fa-solid fa-cart-shopping"><div id="shopping-cart-counter">5</div></i>
-                <div id="bars-menu-btn">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </nav>
-
-            <!--########### Shopping Cart ###########-->
-            <div class="cart-frame" id="shopping-cart">
-                <div class="exit-btn" id="cart-exit-btn"></div>
-                <h2 class="cart-title">Your Products</h2>
-                <div id="cart-products-container">lorem1000</div>
-                <div class="subtotal-container">
-                    <p class="subtotal-label">Subtotal</p>
-                    <span class="subtotal-amount" id="subtotal-amount">$ 2000</span>
-                    <p class="subtotal-label">Shipping</p>
-                    <span class="subtotal-amount" id="shipping-amount">$ 200</span>
-                </div>
-                <div class="separator separator-style2"></div>
-                <div class="total-container">
-                    <p class="total-label">Total</p>
-                    <span class="total-amount gradient-text" id="total-amount">$ 2200</span>
-                </div>
-                <div class="btn-container">
-                    <button class="btn-style-dark">Comprar</button>
-                    <button class="btn-style-dark">Delete All</button>
-                </div>
+        <div id="header-logo"></div>
+        <nav id="navbar">
+            <ul id="navbar-list">
+                <li class="list-item">
+                    <a href="#hero">Home</a>
+                </li>
+                <li class="list-item">
+                    <a href="#products-section">Fx Pedals</a>
+                </li>
+                <li class="list-item">
+                    <i id="user-icon" class="fa fa-user" aria-hidden="true"></i>
+                </li>
+            </ul>
+            <i id="shopping-cart-icon" class="fa-sharp fa-solid fa-cart-shopping"><div id="shopping-cart-counter">5</div></i>
+            <div id="bars-menu-btn">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
-            <!-- Overlay -->
-            <div id="shopping-cart-bg" class="blur-bg"></div>
+        </nav>
+
+        <!--########### Shopping Cart ###########-->
+        <div class="cart-frame" id="shopping-cart">
+            <div class="exit-btn" id="cart-exit-btn">
+
+            </div>
+            <h2 class="cart-title">Your Products</h2>
+            <div id="cart-products-container">
+
+            </div>
+            <div class="subtotal-container">
+                <p class="subtotal-label">Subtotal</p>
+                <span class="subtotal-amount" id="subtotal-amount">$ 2000</span>
+                <p class="subtotal-label">Shipping</p>
+                <span class="subtotal-amount" id="shipping-amount">$ 200</span>
+            </div>
+            <div class="separator separator-style2">
+
+            </div>
+            <div class="total-container">
+                <p class="total-label">Total</p>
+                <span class="total-amount gradient-text" id="total-amount">$ 2200</span>
+            </div>
+            <div class="btn-container">
+                <button class="btn-style-dark">Comprar</button>
+                <button class="btn-style-light" class="delete-all-products">Delete All</button>
+            </div>
         </div>
+        <!-- Overlay -->
+        <div id="shopping-cart-bg" class="blur-bg"></div>
     </header>
     <main id="main">
 
