@@ -64,7 +64,6 @@ body{
     align-items: start;
     background: linear-gradient(45deg, var(--white), var(--grey));
     position: relative;
-    overflow: hidden;
 }
 
 /* General Styles */
@@ -749,7 +748,7 @@ h2{
     position: absolute;
     top: 65px;
     right: 0px; 
-    transform: scale(0);
+    transform: scale(0) ;
     transform-origin: right;
     transition: all 0.3s;
     z-index: 5;
