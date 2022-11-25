@@ -667,8 +667,7 @@ h2{
 .blur-bg{
     padding: 65px 10px 10px 10px;
     width: 100%;
-    height: auto;
-    min-height: 100vh;
+    height: 100%;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -680,7 +679,6 @@ h2{
     grid-template-columns: 1fr;
     align-items: start;
     justify-items: end;
-
 }
 
 .blur-bg.show-bg{
