@@ -1,17 +1,23 @@
 //variables
-let categoryCards = []
+let categoryCards = [];
 
 //btns
-const barsMenuBtn = document.getElementById("bars-menu-btn")
-const heroShowProductsBtn = document.getElementById("show-our-products")
+const barsMenuBtn = document.getElementById("bars-menu-btn");
+const heroShowProductsBtn = document.getElementById("show-our-products");
 const userIcon = document.getElementById("user-icon");
+const shoppingCartBtn = document.getElementById("shopping-cart-icon");
+const cartExitBtn = document.getElementById("cart-exit-btn")
 
 //menus
-const navbar = document.getElementById("navbar")
+const navbar = document.getElementById("navbar");
+
+//frames
+const shoppingCartBg = document.getElementById("shopping-cart-bg");
+const shoppingCart = document.getElementById("shopping-cart")
 
 //containers
-const categoryContainer = document.getElementById("category-section")
-const productsContainer = document.getElementById("products-container")
+const categoryContainer = document.getElementById("category-section");
+const productsContainer = document.getElementById("products-container");
 
 function toggleNavbar(){
     navbar.classList.toggle("show-navbar");
@@ -130,6 +136,11 @@ function selectProductCard(event){
     }
 }
 
+function toggleShoppingCart(){
+    shoppingCartBg.classList.toggle("show-bg");
+    shoppingCart.classList.toggle("open-cart")
+}
+
 function init(){
     window.addEventListener("DOMContentLoaded", function(){
         loadCategories(Categories);
@@ -142,7 +153,9 @@ function init(){
     barsMenuBtn.addEventListener("click", toggleNavbar);
     window.addEventListener("scroll", closeNavbarMenuOnScroll);
     navbar.addEventListener("click", toggleNavbar);
-    userIcon.addEventListener("click", function(){window.location.href="./login.html"})
+    userIcon.addEventListener("click", function(){window.location.href="./login.html"});
+    shoppingCartBtn.addEventListener("click", toggleShoppingCart);
+    cartExitBtn.addEventListener("click", toggleShoppingCart);
 
     categoryContainer.addEventListener("click", selectCategory);
     productsContainer.addEventListener("click", selectProductCard);
