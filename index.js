@@ -30,8 +30,34 @@ function toggleNavbarList(){
     barsMenuBtn.classList.toggle("open");
 }
 
+function toggleShoppingCart(){
+    //si el menu esta abierto se cierra
+    if(isMenuOpen()){
+        closeNavbarListMenu();
+    }
+    shoppingCartBg.classList.toggle("show-bg");
+    shoppingCart.classList.toggle("open-cart");
+}
+
+function isShoppingCartOpen(){
+    return shoppingCart.classList.contains("open-cart");
+}
+
+function isMenuOpen(){
+    return navbarList.classList.contains("show-navbar-list");
+}
+
+function closeOpenWindows(){
+    if (isShoppingCartOpen()){
+        shoppingCart.classList.remove("open-cart");
+        shoppingCartBg.classList.remove("show-bg");
+    }else if(isMenuOpen()){
+        navbarList.classList.remove("show-navbar-list");
+        barsMenuBtn.classList.remove("open");
+    }
+}
+
 function closeNavbarMenuOnScroll(){
-    console.log("me ejecuto")
     if (isMenuOpen()){
         closeNavbarListMenu();
     } 
@@ -153,32 +179,7 @@ function selectProductCard(event){
     }
 }
 
-function toggleShoppingCart(){
-    //si el menu esta abierto se cierra
-    if(isMenuOpen()){
-        navbarList.classList.remove("show-navbar-list");
-    }
-    shoppingCartBg.classList.toggle("show-bg");
-    shoppingCart.classList.toggle("open-cart");
-}
 
-function isShoppingCartOpen(){
-    return shoppingCart.classList.contains("open-cart");
-}
-
-function isMenuOpen(){
-    return navbarList.classList.contains("show-navbar-list");
-}
-
-function closeOpenWindows(){
-    if (isShoppingCartOpen()){
-        shoppingCart.classList.remove("open-cart");
-        shoppingCartBg.classList.remove("show-bg");
-    }else if(isMenuOpen()){
-        navbarList.classList.remove("show-navbar-list");
-        barsMenuBtn.classList.remove("open");
-    }
-}
 
 function init(){
     window.addEventListener("DOMContentLoaded", function(){
