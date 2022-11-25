@@ -702,6 +702,7 @@ h2{
     right: -200%; 
     transition: all 0.3s;
     z-index: 5;
+    overflow-y: scroll;
 }
 
 .cart-frame.open-cart{
@@ -720,7 +721,7 @@ h2{
 #cart-products-container{
     width: 100%;
     height: auto;
-    min-height: 700px; /*300px*/
+    min-height: 300px; /*300px*/
     display: grid;
     grid-auto-rows: min-content;
     align-items: start;
