@@ -18,6 +18,7 @@ const shoppingCart = document.getElementById("shopping-cart")
 //containers
 const categoryContainer = document.getElementById("category-section");
 const productsContainer = document.getElementById("products-container");
+const cartProductsContainer = document.getElementById("cart-products-container")
 
 function toggleNavbar(){
     navbar.classList.toggle("show-navbar");
