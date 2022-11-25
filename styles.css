@@ -798,7 +798,7 @@ h2{
 .subtotal-label{
     justify-self: start;
     font-size: var(--fs-small1);
-    font-weight: var(--fw-light);
+    font-weight: var(--fw-normal);
     color: var(--black);
 }
 
