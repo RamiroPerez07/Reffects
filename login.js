@@ -22,6 +22,8 @@ function checkPasswordInput(){
     const inputValue = passwordInput.value.trim()
     if(isEmpty(inputValue)){
         showErrorMessage(passwordInput, "Password cannot be empty");
+    }else if (isPasswordValid(inputValue)){
+        showErrorMessage(passwordInput, "Looks like this is not a valid password");
     }else{
         showSuccessMessage(passwordInput)
         valid=true;
@@ -39,6 +41,11 @@ function showErrorMessage(input, msg){
     const formField = input.parentElement;
     const msgText = formField.querySelector("small");
     msgText.textContent = msg;
+}
+
+function isPasswordValid(inputValue){
+    const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+    return regex.test(inputValue);
 }
 
 function isEmpty(inputValue){
