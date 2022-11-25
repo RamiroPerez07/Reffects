@@ -829,7 +829,7 @@ h2{
 .total-label{
     justify-self: start;
     font-size: var(--fs-medium0);
-    font-weight: var(--fw-medium);
+    font-weight: var(--fw-normal);
     color: var(--black);
 }
 
