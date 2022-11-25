@@ -1023,7 +1023,7 @@ h2{
         padding: 20px;
     }
 
-    #navbar-list.show-navbar{
+    #navbar-list.show-navbar-list{
         top: 65px;
         transition: all 0.2s ease;
     }
