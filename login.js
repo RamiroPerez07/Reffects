@@ -22,7 +22,7 @@ function checkPasswordInput(){
     const inputValue = passwordInput.value.trim()
     if(isEmpty(inputValue)){
         showErrorMessage(passwordInput, "Password cannot be empty");
-    }else if (isPasswordValid(inputValue)){
+    }else if (!isPasswordValid(inputValue)){
         showErrorMessage(passwordInput, "Looks like this is not a valid password");
     }else{
         showSuccessMessage(passwordInput)
@@ -44,7 +44,16 @@ function showErrorMessage(input, msg){
 }
 
 function isPasswordValid(inputValue){
-    const regex = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+    //Minimum eight characters, at least one letter and one number:
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+    //Minimum eight characters, at least one letter, one number and one special character:
+    //const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+    //Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
+    //const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+    //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+    //const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    //Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+    //const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
     return regex.test(inputValue);
 }
 
