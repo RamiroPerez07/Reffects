@@ -64,7 +64,7 @@ body{
     align-items: start;
     background: linear-gradient(45deg, var(--white), var(--grey));
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 /* General Styles */
