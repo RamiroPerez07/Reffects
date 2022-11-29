@@ -28,6 +28,7 @@ const cartProductsContainer = document.getElementById("cart-products-container")
 const subtotalLabel = document.getElementById("subtotal-amount");
 const shippingLabel = document.getElementById("shipping-amount");
 const totalLabel = document.getElementById("total-amount");
+const shoppingCartCounter = document.getElementById("shopping-cart-counter")
 
 /*
 Llamada de productos (pedales) desde el local storage
@@ -342,6 +343,8 @@ function decreaseProductQuantity(event, objProduct){
 }
 
 
+
+
 function hasProductAlreadyBeenAddedToTheCart(objProduct){
     return pedalsInCart.some(objPedal =>{
         return objPedal.id == objProduct.id;
@@ -413,9 +416,17 @@ function updateShoppingCartInfo(arrayOfObjects){
     const subtotalAmount = calculateSubtotalAmount();
     const shippingAmount = calculateShippingAmount();
     const totalAmount = calculateTotalAmount(subtotalAmount, shippingAmount);
-    updateTotalInfo(subtotalAmount, shippingAmount, totalAmount);
+    const shoppingCartQuantity = calculateShoppingCartProductCounter();
+    updateTotalInfo(subtotalAmount, shippingAmount, totalAmount, shoppingCartQuantity);
     /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
     renderLastSearchedProducts();
+}
+
+function calculateShoppingCartProductCounter(){
+    const quantityCounter = pedalsInCart.reduce((acc, objProduct)=>{
+        return acc + objProduct.quantity;
+    },0);
+    return quantityCounter;
 }
 
 function calculateShippingAmount(){
@@ -438,10 +449,16 @@ function calculateTotalAmount(subtotalAmount, shippingAmount){
     return subtotalAmount + shippingAmount;
 }
 
-function updateTotalInfo(subtotalAmount, shippingAmount, totalAmount){
+function updateTotalInfo(subtotalAmount, shippingAmount, totalAmount, shoppingCartQuantity){
     subtotalLabel.textContent = `$ ${subtotalAmount}`;
     shippingLabel.textContent = `$ ${shippingAmount}`;
     totalLabel.textContent = `$ ${totalAmount}`;
+    if (shoppingCartQuantity>0){
+        shoppingCartCounter.style.display = "grid"
+        shoppingCartCounter.textContent = `${shoppingCartQuantity}`
+    }else{
+        shoppingCartCounter.style.display = "none"
+    }
 }
 
 
@@ -455,6 +472,7 @@ function init(){
         setStyleOfSelectedCategory(categoryCards[0])
         saveItemInLocalStorage(Pedals, "last-search");
         renderProducts(Pedals);
+        updateShoppingCartInfo(pedalsInCart);
     })
 
     barsMenuBtn.addEventListener("click", toggleNavbarList);
