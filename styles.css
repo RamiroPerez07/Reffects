@@ -119,6 +119,7 @@ li{
     box-shadow: 0px 0px 2px 0px black;
     border-radius: 2px;
     cursor: pointer;
+    border: none;
 }
 
 .exit-btn:hover{
@@ -785,6 +786,94 @@ h2{
     justify-items: center;
     gap: 10px;
     box-shadow: 0px 0px 3px -1px var(--black);
+    padding: 10px;
+}
+
+.cart-product-card{
+    width: 100%;
+    height: auto;
+    padding: 7px;
+    display: grid;
+    grid-template-columns: 60px 1fr 70px;
+    align-items: start;
+    justify-items: center;
+    grid-auto-rows: min-content;
+    gap: 8px 0px;
+    background: linear-gradient(45deg, var(--white), var(--grey));
+    box-shadow: 0px 0px 3px -1px var(--black);
+}
+
+.cart-product-img{
+    width: 100%;
+    max-width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    grid-column: 1/2;
+    grid-row: 1/4;
+}
+
+.cart-product-name{
+    font-size: var(--fs-small1);
+    font-weight: var(--fw-normal);
+    text-align: left;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    justify-self: start;
+}
+
+.cart-product-brand{
+    font-size: var(--fs-small0);
+    font-weight: var(--fw-normal);
+    color: var(--black);
+    text-align: left;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    justify-self: start;
+}
+
+.cart-product-price{
+    font-size: var(--fs-small1);
+    font-weight: var(--fw-bold);
+    color: var(--black);
+    text-align: left;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    justify-self: start;
+}
+
+.quit-product-btn{
+    width: 12px;
+    height: 12px;
+    grid-column: 3/4;
+    grid-row: 1/2;
+    justify-self: right;
+}
+
+.quantity-manage-box{
+    width: 80px;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    grid-column: 3/4;
+    grid-row: 2/4;
+    align-self: end;
+}
+
+.quantity-btn{
+    height: 20px;
+    width: 20px;
+    padding: 0px;
+    display: grid;
+    place-items: center;
+}
+
+.quantity-product-label{
+    font-size: var(--fs-small1);
+    font-weight: var(--fw-bold);
+    color: var(--black);
 }
 
 .subtotal-container{

@@ -21,6 +21,41 @@ const categoryContainer = document.getElementById("category-section");
 const productsContainer = document.getElementById("products-container");
 const cartProductsContainer = document.getElementById("cart-products-container")
 
+/*
+Llamada de productos (pedales) desde el local storage
+De lo contrario traer el array vacio
+*/
+
+let pedalsInCart = JSON.parse(localStorage.getItem("pedals-in-cart")) || [];
+
+function saveItemInLocalStorage(array, key){
+    localStorage.setItem(key, JSON.stringify(array))
+}
+
+function createHtmlCartProductCard(objProduct){
+    const {id, url_img, name, brand, price, quantity} = objProduct
+    return `
+    <div class="cart-product-card" data-id="${id}">
+        <div class="cart-product-img" style="background-image: url('${url_img}')"></div>
+        <h3 class="cart-product-name gradient-text">${name}</h3>
+        <span class="cart-product-brand">${brand}</span>
+        <span class="cart-product-price">$ ${price}</span>
+        <button data-id="${id}" class="exit-btn quit-product-btn"></button>
+        <div class="quantity-manage-box">
+            <button data-id="${id}" class="decrease-quantity-btn btn-style-dark quantity-btn">-</button>
+            <span class="quantity-product-label">${quantity}</span>
+            <button data-id="${id}" class="increase-quantity-btn btn-style-dark quantity-btn">+</button>
+        </div>
+    </div>
+    `;
+}
+
+function renderProductsInShoppingCart(arrayOfProducts){
+    const html = arrayOfProducts.map(createHtmlCartProductCard).join("");
+    cartProductsContainer.innerHTML = html;
+}
+
+
 function toggleNavbarList(){
     //si el carro esta abierto lo cierra
     if(isShoppingCartOpen()){
@@ -37,6 +72,7 @@ function toggleShoppingCart(){
     }
     shoppingCartBg.classList.toggle("show-bg");
     shoppingCart.classList.toggle("open-cart");
+    renderProductsInShoppingCart(pedalsInCart);
 }
 
 function isShoppingCartOpen(){
@@ -117,6 +153,13 @@ function getProductByCategory(tag){
     return productsFilteredByTag;
 }
 
+function findProductById(id, arrayOfObjects){
+    const productFilteredById = arrayOfObjects.find(objPedal =>{
+        return objPedal.id == id;
+    })
+    return productFilteredById;
+}
+
 /*----------------Renderización de elementos--------------- */
 
 function createFxTags(arrayFx){
@@ -152,7 +195,7 @@ function createHtmlProductCard(objProduct){
             <div class="separator"></div>
             <div class="price-info-container">
                 <span class="product-price">$ ${price}</span>
-                <button class="btn-style-dark" data-id="${id}">Add</button>
+                <button class="btn-style-dark add-product-btn" data-id="${id}">Add</button>
             </div>  
         </div>
     </div>
@@ -165,6 +208,8 @@ function renderProducts(arrayOfProducts){
 }
 
 function selectProductCard(event){
+
+    //ver la descripción de un producto
     if (event.target.classList.contains("show-product-description")){
         //obtengo la card en cuestion (o sea la seleccionada)
         const card = event.target.closest(".product-card");
@@ -176,10 +221,103 @@ function selectProductCard(event){
         const arrow = card.querySelector(".icon-arrow-down");
         //alterno la clase de la flecha para que cambie entre vista hacia arriba y hacia abajo
         arrow.classList.toggle("look-up");
+        return;
     }
+
+    //agregar producto al carrito
+    if(event.target.classList.contains("add-product-btn")){
+        //se captura el id seleccionado
+        const selectedIdProduct = event.target.dataset.id;
+        //se captura el producto
+        const selectedProduct = findProductById(selectedIdProduct, Pedals);
+        // ¿ el producto existe en el carrito?
+        increaseProductQuantity(selectedProduct);
+    }
+
+}
+
+function increaseProductQuantity(objProduct){
+    if(hasProductAlreadyBeenAddedToTheCart(objProduct)){
+        //si el objeto existe actualizo el array pedals in carts con la nueva cantidad
+        pedalsInCart = pedalsInCart.map(objPedal => {
+            if(objPedal.id == objProduct.id){
+                objPedal.quantity++;
+            }
+            return objPedal;
+        })
+    }else{
+        //si aun no existe en el carro agrego un objeto al array
+        pedalsInCart = [...pedalsInCart, {...objProduct, quantity: 1}]
+    }
+    //en ambos casos guardo la data en el local storage
+    saveItemInLocalStorage(pedalsInCart, "pedals-in-cart");
+    renderProductsInShoppingCart(pedalsInCart);
+}
+
+function decreaseProductQuantity(objProduct){
+    //si el item posee cantidad igual a 1 y se hace click en menos, se consulta al usuario para eliminar
+    if (objProduct.quantity == 1){
+        console.log("increso")
+        const res = window.confirm(`Do you want to remove ${objProduct.name} from shopping cart?`)
+        if (res == true){
+            removeProductFromShoppingCart(objProduct);
+            return;
+        }
+    }
+    pedalsInCart = pedalsInCart.map(objPedal => {
+        if(objPedal.id == objProduct.id){
+            objPedal.quantity--;
+        }
+        return objPedal;
+    })
+    saveItemInLocalStorage(pedalsInCart, "pedals-in-cart");
+    renderProductsInShoppingCart(pedalsInCart);
 }
 
 
+function hasProductAlreadyBeenAddedToTheCart(objProduct){
+    return pedalsInCart.some(objPedal =>{
+        return objPedal.id == objProduct.id;
+    })
+}
+
+function getCartProductsUnlessSpecified(objProduct){
+    console.log(pedalsInCart)
+    return pedalsInCart.filter(objPedal => {
+        return objPedal.id != objProduct.id;
+    })
+}
+
+function removeProductFromShoppingCart(objProduct){
+    //se filtra por los productos quitando el del id seleccionado
+    const filteredProducts = getCartProductsUnlessSpecified(objProduct);
+    saveItemInLocalStorage(filteredProducts, "pedals-in-cart");
+    renderProductsInShoppingCart(filteredProducts);   
+}
+
+function selectedCartProduct(event){
+    //eliminacion de productos
+    if (event.target.classList.contains("quit-product-btn")){
+        const idProductSelected = event.target.dataset.id;
+        const filteredProduct = findProductById(idProductSelected, pedalsInCart)
+        removeProductFromShoppingCart(filteredProduct);
+    }
+
+    //agregado de productos
+    if (event.target.classList.contains("increase-quantity-btn")){
+        const idProductSelected = event.target.dataset.id;
+        const filteredProduct = findProductById(idProductSelected, pedalsInCart)
+        increaseProductQuantity(filteredProduct);
+    }
+
+    //disminucion de productos
+    if (event.target.classList.contains("decrease-quantity-btn")){
+        const idProductSelected = event.target.dataset.id;
+        const filteredProduct = findProductById(idProductSelected, pedalsInCart)
+        console.log(filteredProduct)
+        decreaseProductQuantity(filteredProduct);
+    }
+}
 
 function init(){
     window.addEventListener("DOMContentLoaded", function(){
@@ -198,10 +336,11 @@ function init(){
     cartExitBtn.addEventListener("click", toggleShoppingCart);
     //header.addEventListener("click",closeOpenWindows);
 
+
     categoryContainer.addEventListener("click", selectCategory);
     productsContainer.addEventListener("click", selectProductCard);
+    cartProductsContainer.addEventListener("click", selectedCartProduct)
     heroShowProductsBtn.addEventListener("click", function(){window.location.href='#products-section'})
-
 }
 
 init()
