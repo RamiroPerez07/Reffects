@@ -7,7 +7,8 @@ const heroShowProductsBtn = document.getElementById("show-our-products");
 const userIcon = document.getElementById("user-icon");
 const shoppingCartBtn = document.getElementById("shopping-cart-icon");
 const cartExitBtn = document.getElementById("cart-exit-btn");
-const deleteAllProductsBtn = document.getElementById("delete-all-products-btn")
+const deleteAllProductsBtn = document.getElementById("delete-all-products-btn");
+const confirmPurchaseBtn = document.getElementById("confirm-purchase-btn");
 
 
 
@@ -384,8 +385,12 @@ function selectedCartProduct(event){
 
 /* Funciones de eliminación de productos */
 
+function isShoppingCartEmpty(){
+    return !pedalsInCart.length;
+}
+
 function deleteAllProductsFromShoppingCart(){
-    if (!pedalsInCart.length){
+    if (isShoppingCartEmpty()){
         alert("There are no products in the cart!")
         return;
     }
@@ -461,6 +466,18 @@ function updateTotalInfo(subtotalAmount, shippingAmount, totalAmount, shoppingCa
     }
 }
 
+function confirmPurchase(){
+    if (isShoppingCartEmpty()){
+        alert("There are no products in the cart!")
+        return;
+    }
+    const res = window.confirm(`Are you sure to confirm the purchase for a total of ${totalLabel.textContent}`);
+    if (res) {
+        deleteAllProductsFromShoppingCart();
+        alert("Thanks for your purchase!");
+        toggleShoppingCart();
+    }
+}
 
 /* Funcion inicializadora */
 
@@ -482,7 +499,7 @@ function init(){
     shoppingCartBtn.addEventListener("click", toggleShoppingCart);
     cartExitBtn.addEventListener("click", toggleShoppingCart);
     deleteAllProductsBtn.addEventListener("click", deleteAllProductsFromShoppingCart);
-    //header.addEventListener("click",closeOpenWindows);
+    confirmPurchaseBtn.addEventListener("click", confirmPurchase)
 
 
     categoryContainer.addEventListener("click", selectCategory);
