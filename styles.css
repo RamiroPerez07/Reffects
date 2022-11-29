@@ -89,6 +89,14 @@ li{
     filter:brightness(1.5);
 }
 
+.btn-dark-disabled{
+    filter: grayscale(90%);
+}
+
+.btn-dark-disabled:hover{
+    filter: grayscale(90%);
+}
+
 .gradient-text{
     background: linear-gradient(to top, var(--darkRed),var(--black));
     -webkit-background-clip: text;

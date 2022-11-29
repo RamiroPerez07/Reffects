@@ -6,7 +6,10 @@ const barsMenuBtn = document.getElementById("bars-menu-btn");
 const heroShowProductsBtn = document.getElementById("show-our-products");
 const userIcon = document.getElementById("user-icon");
 const shoppingCartBtn = document.getElementById("shopping-cart-icon");
-const cartExitBtn = document.getElementById("cart-exit-btn")
+const cartExitBtn = document.getElementById("cart-exit-btn");
+const deleteAllProductsBtn = document.getElementById("delete-all-products-btn")
+let addProductBtns = document.getElementsByClassName("add-product-btn");
+addProductBtns = [...addProductBtns];
 
 //menus
 const navbarList = document.getElementById("navbar-list");
@@ -19,7 +22,12 @@ const header = document.getElementById("body-header");
 //containers
 const categoryContainer = document.getElementById("category-section");
 const productsContainer = document.getElementById("products-container");
-const cartProductsContainer = document.getElementById("cart-products-container")
+const cartProductsContainer = document.getElementById("cart-products-container");
+
+//labels
+const subtotalLabel = document.getElementById("subtotal-amount");
+const shippingLabel = document.getElementById("shipping-amount");
+const totalLabel = document.getElementById("total-amount");
 
 /*
 Llamada de productos (pedales) desde el local storage
@@ -27,9 +35,25 @@ De lo contrario traer el array vacio
 */
 
 let pedalsInCart = JSON.parse(localStorage.getItem("pedals-in-cart")) || [];
+let shippingCost = 300;
+
+/* Funciones de local storage */
 
 function saveItemInLocalStorage(array, key){
     localStorage.setItem(key, JSON.stringify(array))
+}
+
+
+/* Funciones de renderizado de componentes */
+
+function createHtmlCategoryCard(objCategory){
+    const {name, url_img} = objCategory;
+    return `
+    <div class="category-card category-selection" data-category = "${name}">
+        <div class="category-img category-selection" style="background-image : url('${url_img}')"></div>
+        <span class="category-name category-selection">${name}</span>
+    </div>
+    `;
 }
 
 function createHtmlCartProductCard(objProduct){
@@ -44,10 +68,56 @@ function createHtmlCartProductCard(objProduct){
         <div class="quantity-manage-box">
             <button data-id="${id}" class="decrease-quantity-btn btn-style-dark quantity-btn">-</button>
             <span class="quantity-product-label">${quantity}</span>
-            <button data-id="${id}" class="increase-quantity-btn btn-style-dark quantity-btn">+</button>
+            <button data-id="${id}" class="increase-quantity-btn btn-style-dark quantity-btn ${!isStockAvailable(objProduct)?'btn-dark-disabled':''}">+</button>
         </div>
     </div>
     `;
+}
+
+
+function createHtmlProductCard(objProduct){
+    const {id, name, brand, fxs, description, url_img, price, free_shipping, stock} = objProduct;
+    return `
+    <div class="product-card">
+        ${free_shipping?`<div class="shipping-img" style="background-image: url('./img/utils/free-shipping.png')"></div>`:""}
+        ${stock==0?`<div class="out-of-stock-img" style="background-image: url('./img/utils/out-of-stock.png')"></div>`:""}
+        <div class="product-img" style="background-image: url('${url_img}')"></div>
+        <div class="product-info">
+            <h3 class="product-name gradient-text">${name}</h3>
+            <span class="product-brand">${brand}</span>
+            <div class="fx-container">
+                ${createFxTags(fxs)}
+            </div>
+            <div class="description-toggle show-product-description">
+                <p class="description-title show-product-description">Description</p>
+                <div class="icon-arrow-down show-product-description" style="background-image: url('./img/utils/icon-arrow-down.svg')"></div>
+            </div>
+            <p class="product-description">${description}</p>
+            <div class="separator"></div>
+            <div class="price-info-container">
+                <span class="product-price">$ ${price}</span>
+                <button class="btn-style-dark add-product-btn ${!isStockAvailable(objProduct)?'btn-dark-disabled':''}" data-id="${id}">Add</button>
+            </div>  
+        </div>
+    </div>
+    `;
+}
+
+function createFxTags(arrayFx){
+    const tags = arrayFx.map(fx =>{
+        let htmlComponent = ""
+        const effect = fx.toString().toUpperCase()
+        if(effect != "ALL"){
+            htmlComponent = `<div class="tag ${effect}-style">${effect}</div>`;
+        }
+        return htmlComponent
+    }).join("");
+    return tags
+}
+
+function loadCategories(Categories){
+    const html = Categories.map(createHtmlCategoryCard).join("");
+    categoryContainer.innerHTML = html;
 }
 
 function renderProductsInShoppingCart(arrayOfProducts){
@@ -55,6 +125,19 @@ function renderProductsInShoppingCart(arrayOfProducts){
     cartProductsContainer.innerHTML = html;
 }
 
+function renderProducts(arrayOfProducts){
+    const html = arrayOfProducts.map(createHtmlProductCard).join("");
+    productsContainer.innerHTML = html;
+}
+
+function renderLastSearchedProducts(){
+    console.log("me ejecuto")
+    const lastSearchedProducts = JSON.parse(localStorage.getItem("last-search")) || [];
+    renderProducts(lastSearchedProducts);
+}
+
+
+/* Funciones de utilidades y UI */
 
 function toggleNavbarList(){
     //si el carro esta abierto lo cierra
@@ -72,7 +155,8 @@ function toggleShoppingCart(){
     }
     shoppingCartBg.classList.toggle("show-bg");
     shoppingCart.classList.toggle("open-cart");
-    renderProductsInShoppingCart(pedalsInCart);
+    updateShoppingCartInfo(pedalsInCart);
+    renderLastSearchedProducts(); 
 }
 
 function isShoppingCartOpen(){
@@ -109,20 +193,7 @@ function closeNavbarListMenu(){
     barsMenuBtn.classList.remove("open");
 }
 
-function createHtmlCategoryCard(objCategory){
-    const {name, url_img} = objCategory;
-    return `
-    <div class="category-card category-selection" data-category = "${name}">
-        <div class="category-img category-selection" style="background-image : url('${url_img}')"></div>
-        <span class="category-name category-selection">${name}</span>
-    </div>
-    `;
-}
-
-function loadCategories(Categories){
-    const html = Categories.map(createHtmlCategoryCard).join("");
-    categoryContainer.innerHTML = html;
-}
+/* Seleccion e interacción con las categorias */
 
 function removeSelectedCategory(){
     categoryCards.forEach(card =>{
@@ -144,6 +215,7 @@ function selectCategory(event){
     setStyleOfSelectedCategory(selectedCategoryCard);
     const productsFilteredByTag = getProductByCategory(selectedCategory);
     renderProducts(productsFilteredByTag);
+    saveItemInLocalStorage(productsFilteredByTag, "last-search")
 }
 
 function getProductByCategory(tag){
@@ -153,6 +225,9 @@ function getProductByCategory(tag){
     return productsFilteredByTag;
 }
 
+
+/* Funciones de busqueda */
+
 function findProductById(id, arrayOfObjects){
     const productFilteredById = arrayOfObjects.find(objPedal =>{
         return objPedal.id == id;
@@ -160,52 +235,23 @@ function findProductById(id, arrayOfObjects){
     return productFilteredById;
 }
 
-/*----------------Renderización de elementos--------------- */
 
-function createFxTags(arrayFx){
-    const tags = arrayFx.map(fx =>{
-        let htmlComponent = ""
-        const effect = fx.toString().toUpperCase()
-        if(effect != "ALL"){
-            htmlComponent = `<div class="tag ${effect}-style">${effect}</div>`;
-        }
-        return htmlComponent
-    }).join("");
-    return tags
+
+
+
+function isStockAvailable(objProduct){
+    const idProductSelected = objProduct.id;
+    let stock_available = true;
+    if (hasProductAlreadyBeenAddedToTheCart(objProduct)){
+        const filteredProduct = findProductById(idProductSelected,pedalsInCart);
+        stock_available = isQuantityBelowStock(filteredProduct);
+        console.log(`El producto ${objProduct.name} tiene stock disponible? ${stock_available}`)
+    }
+    
+    return isThereProductStock(objProduct) && stock_available ;
 }
 
-function createHtmlProductCard(objProduct){
-    const {id, name, brand, fxs, description, url_img, price, free_shipping, stock} = objProduct;
-    return `
-    <div class="product-card">
-        ${free_shipping?`<div class="shipping-img" style="background-image: url('./img/utils/free-shipping.png')"></div>`:""}
-        ${stock==0?`<div class="out-of-stock-img" style="background-image: url('./img/utils/out-of-stock.png')"></div>`:""}
-        <div class="product-img" style="background-image: url('${url_img}')"></div>
-        <div class="product-info">
-            <h3 class="product-name gradient-text">${name}</h3>
-            <span class="product-brand">${brand}</span>
-            <div class="fx-container">
-                ${createFxTags(fxs)}
-            </div>
-            <div class="description-toggle show-product-description">
-                <p class="description-title show-product-description">Description</p>
-                <div class="icon-arrow-down show-product-description" style="background-image: url('./img/utils/icon-arrow-down.svg')"></div>
-            </div>
-            <p class="product-description">${description}</p>
-            <div class="separator"></div>
-            <div class="price-info-container">
-                <span class="product-price">$ ${price}</span>
-                <button class="btn-style-dark add-product-btn" data-id="${id}">Add</button>
-            </div>  
-        </div>
-    </div>
-    `;
-}
 
-function renderProducts(arrayOfProducts){
-    const html = arrayOfProducts.map(createHtmlProductCard).join("");
-    productsContainer.innerHTML = html;
-}
 
 function selectProductCard(event){
 
@@ -230,48 +276,76 @@ function selectProductCard(event){
         const selectedIdProduct = event.target.dataset.id;
         //se captura el producto
         const selectedProduct = findProductById(selectedIdProduct, Pedals);
-        // ¿ el producto existe en el carrito?
-        increaseProductQuantity(selectedProduct);
+        // Incrementamos la cantidad del producto
+        increaseProductQuantity(event, selectedProduct);
     }
 
 }
 
-function increaseProductQuantity(objProduct){
+function isThereProductStock(objProduct){
+    return objProduct.stock > 0;
+}
+
+function isQuantityBelowStock(objProduct){
+    console.log("stock", objProduct.stock, "cantidad", objProduct.quantity)
+    return objProduct.quantity < objProduct.stock;
+}
+
+function setBtnAsDisabled(button){
+    button.classList.add("btn-dark-disabled")
+}
+
+function increaseProductQuantity(event, objProduct){
+    if (!isThereProductStock(objProduct)){
+        alert(`There is no stock of ${objProduct.name}`);
+        return;
+    }
     if(hasProductAlreadyBeenAddedToTheCart(objProduct)){
+        //busco el producto en el carrito
+        const filteredProduct = findProductById(objProduct.id, pedalsInCart)
+        //chequeo si la cantidad es menor al stock
+        if (!isQuantityBelowStock(filteredProduct)){
+            alert(`There are only ${filteredProduct.stock} units of ${filteredProduct.name} available!`);
+            return;
+        }
         //si el objeto existe actualizo el array pedals in carts con la nueva cantidad
         pedalsInCart = pedalsInCart.map(objPedal => {
             if(objPedal.id == objProduct.id){
                 objPedal.quantity++;
+                if (!isQuantityBelowStock(objPedal)){
+                    setBtnAsDisabled(event.target);
+                }
             }
             return objPedal;
         })
+
     }else{
         //si aun no existe en el carro agrego un objeto al array
         pedalsInCart = [...pedalsInCart, {...objProduct, quantity: 1}]
     }
-    //en ambos casos guardo la data en el local storage
-    saveItemInLocalStorage(pedalsInCart, "pedals-in-cart");
-    renderProductsInShoppingCart(pedalsInCart);
+    /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
+    renderLastSearchedProducts();
+    //actualizamos el carrito
+    updateShoppingCartInfo(pedalsInCart);
 }
 
-function decreaseProductQuantity(objProduct){
+function decreaseProductQuantity(event, objProduct){
     //si el item posee cantidad igual a 1 y se hace click en menos, se consulta al usuario para eliminar
     if (objProduct.quantity == 1){
-        console.log("increso")
-        const res = window.confirm(`Do you want to remove ${objProduct.name} from shopping cart?`)
-        if (res == true){
-            removeProductFromShoppingCart(objProduct);
-            return;
-        }
+        removeProductFromShoppingCart(objProduct);
+        return;
     }
+    //sino se disminuye la cantidad en 1
     pedalsInCart = pedalsInCart.map(objPedal => {
         if(objPedal.id == objProduct.id){
             objPedal.quantity--;
         }
         return objPedal;
     })
-    saveItemInLocalStorage(pedalsInCart, "pedals-in-cart");
-    renderProductsInShoppingCart(pedalsInCart);
+    /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
+    renderLastSearchedProducts();
+    //actualizo el carrito
+    updateShoppingCartInfo(pedalsInCart);
 }
 
 
@@ -282,18 +356,12 @@ function hasProductAlreadyBeenAddedToTheCart(objProduct){
 }
 
 function getCartProductsUnlessSpecified(objProduct){
-    console.log(pedalsInCart)
-    return pedalsInCart.filter(objPedal => {
+    pedalsInCart = pedalsInCart.filter(objPedal => {
         return objPedal.id != objProduct.id;
     })
+    return pedalsInCart;
 }
 
-function removeProductFromShoppingCart(objProduct){
-    //se filtra por los productos quitando el del id seleccionado
-    const filteredProducts = getCartProductsUnlessSpecified(objProduct);
-    saveItemInLocalStorage(filteredProducts, "pedals-in-cart");
-    renderProductsInShoppingCart(filteredProducts);   
-}
 
 function selectedCartProduct(event){
     //eliminacion de productos
@@ -307,17 +375,87 @@ function selectedCartProduct(event){
     if (event.target.classList.contains("increase-quantity-btn")){
         const idProductSelected = event.target.dataset.id;
         const filteredProduct = findProductById(idProductSelected, pedalsInCart)
-        increaseProductQuantity(filteredProduct);
+        increaseProductQuantity(event,filteredProduct);
     }
 
     //disminucion de productos
     if (event.target.classList.contains("decrease-quantity-btn")){
         const idProductSelected = event.target.dataset.id;
         const filteredProduct = findProductById(idProductSelected, pedalsInCart)
-        console.log(filteredProduct)
-        decreaseProductQuantity(filteredProduct);
+        decreaseProductQuantity(event,filteredProduct);
     }
 }
+
+/* Funciones de eliminación de productos */
+
+function deleteAllProductsFromShoppingCart(){
+    if (!pedalsInCart.length){
+        alert("There are no products in the cart!")
+        return;
+    }
+    const res = window.confirm("Are you sure to remove all products from the shopping cart?");
+    if (res){
+        //genero un array vacio para luego guardarlo en el LStorage
+        pedalsInCart = [];
+        updateShoppingCartInfo(pedalsInCart);
+    }
+}
+
+function removeProductFromShoppingCart(objProduct){
+    const res = window.confirm(`Do you want to remove ${objProduct.name} from shopping cart?`)
+    if (res == true){
+        //se filtra por los productos quitando el del id seleccionado
+        const filteredProducts = getCartProductsUnlessSpecified(objProduct);
+        //actualizo carrito
+        updateShoppingCartInfo(filteredProducts);
+    }
+}
+
+
+/* Funciones de resumen */
+
+function updateShoppingCartInfo(arrayOfObjects){
+    saveItemInLocalStorage(arrayOfObjects, "pedals-in-cart");
+    renderProductsInShoppingCart(arrayOfObjects);
+    const subtotalAmount = calculateSubtotalAmount();
+    const shippingAmount = calculateShippingAmount();
+    const totalAmount = calculateTotalAmount(subtotalAmount, shippingAmount);
+    updateTotalInfo(subtotalAmount, shippingAmount, totalAmount);
+}
+
+function calculateShippingAmount(){
+    const not_free_shipping = pedalsInCart.some(objProduct => {
+        return objProduct.free_shipping == false;
+    });
+    //si el envio no es gratuito, entonces retornar el costo de envio, si es gratuito retornar 0.
+    //el costo de envio no es acumulativo, es decir, si llevan mas de 2 pedales con costo de envio, solo se cobra un unico costo.
+    return not_free_shipping? shippingCost : 0;  
+}
+
+function calculateSubtotalAmount(){
+    const subtotal = pedalsInCart.reduce((acc, objProduct) => {
+        return acc + (objProduct.quantity * objProduct.price);
+    }, 0 );
+    return subtotal;
+}
+
+function calculateTotalAmount(subtotalAmount, shippingAmount){
+    return subtotalAmount + shippingAmount;
+}
+
+function updateTotalInfo(subtotalAmount, shippingAmount, totalAmount){
+    subtotalLabel.textContent = `$ ${subtotalAmount}`;
+    shippingLabel.textContent = `$ ${shippingAmount}`;
+    totalLabel.textContent = `$ ${totalAmount}`;
+}
+
+
+
+
+
+
+
+/* Funcion inicializadora */
 
 function init(){
     window.addEventListener("DOMContentLoaded", function(){
@@ -334,6 +472,7 @@ function init(){
     userIcon.addEventListener("click", function(){window.location.href="./login.html"});
     shoppingCartBtn.addEventListener("click", toggleShoppingCart);
     cartExitBtn.addEventListener("click", toggleShoppingCart);
+    deleteAllProductsBtn.addEventListener("click", deleteAllProductsFromShoppingCart);
     //header.addEventListener("click",closeOpenWindows);
 
 
