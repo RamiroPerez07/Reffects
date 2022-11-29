@@ -155,7 +155,6 @@ function toggleShoppingCart(){
     shoppingCartBg.classList.toggle("show-bg");
     shoppingCart.classList.toggle("open-cart");
     updateShoppingCartInfo(pedalsInCart);
-    renderLastSearchedProducts(); 
 }
 
 function isShoppingCartOpen(){
@@ -322,8 +321,6 @@ function increaseProductQuantity(event, objProduct){
         //si aun no existe en el carro agrego un objeto al array
         pedalsInCart = [...pedalsInCart, {...objProduct, quantity: 1}]
     }
-    /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
-    renderLastSearchedProducts();
     //actualizamos el carrito
     updateShoppingCartInfo(pedalsInCart);
 }
@@ -341,8 +338,6 @@ function decreaseProductQuantity(event, objProduct){
         }
         return objPedal;
     })
-    /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
-    renderLastSearchedProducts();
     //actualizo el carrito
     updateShoppingCartInfo(pedalsInCart);
 }
@@ -404,10 +399,10 @@ function removeProductFromShoppingCart(objProduct){
     const res = window.confirm(`Do you want to remove ${objProduct.name} from shopping cart?`)
     if (res == true){
         //se filtra por los productos quitando el del id seleccionado
-        const filteredProducts = getCartProductsUnlessSpecified(objProduct);
-        //actualizo carrito
-        updateShoppingCartInfo(filteredProducts);
+        const filteredProducts = getCartProductsUnlessSpecified(objProduct); 
+        updateShoppingCartInfo(filteredProducts);      
     }
+    
 }
 
 
@@ -420,6 +415,8 @@ function updateShoppingCartInfo(arrayOfObjects){
     const shippingAmount = calculateShippingAmount();
     const totalAmount = calculateTotalAmount(subtotalAmount, shippingAmount);
     updateTotalInfo(subtotalAmount, shippingAmount, totalAmount);
+    /*Ejecuto el renderizado de la ultima busca, esto para que se actualice el estado de los botones*/
+    renderLastSearchedProducts();
 }
 
 function calculateShippingAmount(){
