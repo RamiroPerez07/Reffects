@@ -243,7 +243,6 @@ function isStockAvailable(objProduct){
     if (hasProductAlreadyBeenAddedToTheCart(objProduct)){
         const filteredProduct = findProductById(idProductSelected,pedalsInCart);
         stock_available = isQuantityBelowStock(filteredProduct);
-        console.log(`El producto ${objProduct.name} tiene stock disponible? ${stock_available}`)
     }
     
     return isThereProductStock(objProduct) && stock_available ;
@@ -303,7 +302,7 @@ function increaseProductQuantity(event, objProduct){
         const filteredProduct = findProductById(objProduct.id, pedalsInCart)
         //chequeo si la cantidad es menor al stock
         if (!isQuantityBelowStock(filteredProduct)){
-            alert(`There are only ${filteredProduct.stock} units of ${filteredProduct.name} available!`);
+            alert(`There are only ${filteredProduct.stock} available units of ${filteredProduct.name}!`);
             return;
         }
         //si el objeto existe actualizo el array pedals in carts con la nueva cantidad
