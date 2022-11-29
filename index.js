@@ -8,8 +8,8 @@ const userIcon = document.getElementById("user-icon");
 const shoppingCartBtn = document.getElementById("shopping-cart-icon");
 const cartExitBtn = document.getElementById("cart-exit-btn");
 const deleteAllProductsBtn = document.getElementById("delete-all-products-btn")
-let addProductBtns = document.getElementsByClassName("add-product-btn");
-addProductBtns = [...addProductBtns];
+
+
 
 //menus
 const navbarList = document.getElementById("navbar-list");
@@ -131,7 +131,6 @@ function renderProducts(arrayOfProducts){
 }
 
 function renderLastSearchedProducts(){
-    console.log("me ejecuto")
     const lastSearchedProducts = JSON.parse(localStorage.getItem("last-search")) || [];
     renderProducts(lastSearchedProducts);
 }
@@ -215,7 +214,7 @@ function selectCategory(event){
     setStyleOfSelectedCategory(selectedCategoryCard);
     const productsFilteredByTag = getProductByCategory(selectedCategory);
     renderProducts(productsFilteredByTag);
-    saveItemInLocalStorage(productsFilteredByTag, "last-search")
+    saveItemInLocalStorage(productsFilteredByTag, "last-search");
 }
 
 function getProductByCategory(tag){
@@ -450,11 +449,6 @@ function updateTotalInfo(subtotalAmount, shippingAmount, totalAmount){
 }
 
 
-
-
-
-
-
 /* Funcion inicializadora */
 
 function init(){
@@ -463,6 +457,7 @@ function init(){
         categoryCards = document.getElementsByClassName("category-card");
         categoryCards = [...categoryCards] //convierto a array de elementos
         setStyleOfSelectedCategory(categoryCards[0])
+        saveItemInLocalStorage(Pedals, "last-search");
         renderProducts(Pedals);
     })
 
