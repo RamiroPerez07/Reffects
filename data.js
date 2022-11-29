@@ -241,4 +241,15 @@ const Pedals = [
         free_shipping: false,
         stock: 2,
     },
+    {
+        id:23,
+        name: "Shimverb",
+        brand: "Mooer",
+        fxs: ["all","reverb"],
+        description: "Offers different sized acoustic reverbs.",
+        url_img: "./img/pedals/shimverb_mooer.png",
+        price: 24000,
+        free_shipping: false,
+        stock: 3,
+    },
 ]
