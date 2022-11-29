@@ -471,9 +471,10 @@ function confirmPurchase(){
         alert("There are no products in the cart!")
         return;
     }
-    const res = window.confirm(`Are you sure to confirm the purchase for a total of ${totalLabel.textContent}`);
+    const res = window.confirm(`Are you sure to confirm the purchase for a total of ${totalLabel.textContent} ?`);
     if (res) {
-        deleteAllProductsFromShoppingCart();
+        pedalsInCart = [];
+        updateShoppingCartInfo(pedalsInCart);
         alert("Thanks for your purchase!");
         toggleShoppingCart();
     }
