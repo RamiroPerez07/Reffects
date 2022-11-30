@@ -5,6 +5,9 @@ const userForm = document.querySelector(".user-form")
 const usernameInput = document.getElementById("username-input")
 const passwordInput = document.getElementById("password-input")
 
+//btn
+const returnHomeBtn = document.querySelector(".return-home-btn")
+
 //local storage
 let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
 
@@ -96,7 +99,8 @@ function isFormValid(){
 }
 
 function login(){
-    userForm.addEventListener("submit", sendInfo)
+    userForm.addEventListener("submit", sendInfo);
+    returnHomeBtn.addEventListener("click", ()=>{window.location.href="./index.html"});
 }
 
 login()

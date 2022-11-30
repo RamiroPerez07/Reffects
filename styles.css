@@ -955,20 +955,46 @@ h2{
 
 /* ----------------------------------------------- */
 /* Sign In Section */
+
 .frame-container{
     width: 100%;
     height: auto;
     min-height: min(1080px, 100vh); /* Limite en los 1080 pixeles */
     background: linear-gradient(45deg, var(--darkRed), var(--black));
     display: grid;
+    align-items: start;
+    justify-items: center;
+    grid-auto-rows: min-content 1fr;
+    padding: 20px;
+}
+
+.form-nav{
+    width: auto;
+    height: auto;
+    display: grid;
+    align-items: center;
+    padding: 0px 40px;
+    justify-items: end;
+    justify-self: end;
+}
+
+.form-nav-list{
+    width: auto;
+    height: auto;
+    display: grid;
     place-items: center;
+    gap: 15px;
+}
+
+.form-nav-list li{
+    min-height: 40px;
 }
 
 .user-form-window-frame{
     width: 90%;
     max-width: 400px;
     height: auto;
-    min-height: 500px;
+    min-height: 470px;
     background-color: var(--white);
     box-shadow: 0px 0px 3px -1px var(--black);
     border-radius: 8px;
@@ -978,11 +1004,12 @@ h2{
     justify-items: center;
     gap: 20px;
     grid-auto-rows: min-content;
+    align-self: center;
 }
 
 .user-icon{
-    width: 200px ;
-    height: 200px ;
+    width: 160px ;
+    height: 160px ;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -1082,7 +1109,7 @@ h2{
     background-color: #469247;
     position: fixed;
     bottom: -50px;
-    font-size: var(--fs-small1);
+    font-size: var(--fs-small0);
     font-weight: var(--fw-normal);
     text-align: center;
     display: grid;
