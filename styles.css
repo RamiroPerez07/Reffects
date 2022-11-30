@@ -320,7 +320,7 @@ li{
     right: -8px;
     width: 15px;
     height: 15px;
-    font-weight: var(--fw-light);
+    font-weight: var(--fw-normal);
     font-size: var(--fs-xsmall0);
     background-color: var(--red);
     border: 1px solid var(--grey);
