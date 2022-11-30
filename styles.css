@@ -1169,6 +1169,7 @@ h2{
     #products-section{
         max-width: none;
         padding-bottom: 35px;
+        gap: 40px;
     }
 
     #category-section{
