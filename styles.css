@@ -169,7 +169,7 @@ li{
     position: sticky;
     top: 0px;
     z-index: 5;
-    background: linear-gradient(to top, var(--darkRed), var(--black));
+    background: linear-gradient(45deg, var(--darkRed), var(--black), var(--black));
     padding: 10px 60px;
 }
 
