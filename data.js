@@ -8,7 +8,7 @@ const Pedals = [
         url_img: "./img/pedals/bd2-boss.png",
         price: 43000,
         free_shipping: false,
-        stock: 5,
+        stock: 0,
     },
     {
         id:2,

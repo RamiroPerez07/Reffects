@@ -4,13 +4,12 @@ let categoryCards = [];
 //btns
 const barsMenuBtn = document.getElementById("bars-menu-btn");
 const heroShowProductsBtn = document.getElementById("show-our-products");
-const userIcon = document.getElementById("user-icon");
+const signInMenuBtn = document.getElementById("signin-menu-icon");
+const signUpMenuBtn = document.getElementById("signup-menu-icon");
 const shoppingCartBtn = document.getElementById("shopping-cart-icon");
 const cartExitBtn = document.getElementById("cart-exit-btn");
 const deleteAllProductsBtn = document.getElementById("delete-all-products-btn");
 const confirmPurchaseBtn = document.getElementById("confirm-purchase-btn");
-
-
 
 //menus
 const navbarList = document.getElementById("navbar-list");
@@ -29,7 +28,8 @@ const cartProductsContainer = document.getElementById("cart-products-container")
 const subtotalLabel = document.getElementById("subtotal-amount");
 const shippingLabel = document.getElementById("shipping-amount");
 const totalLabel = document.getElementById("total-amount");
-const shoppingCartCounter = document.getElementById("shopping-cart-counter")
+const shoppingCartCounter = document.getElementById("shopping-cart-counter");
+const modal = document.querySelector(".message-modal");
 
 /*
 Llamada de productos (pedales) desde el local storage
@@ -320,7 +320,8 @@ function increaseProductQuantity(event, objProduct){
 
     }else{
         //si aun no existe en el carro agrego un objeto al array
-        pedalsInCart = [...pedalsInCart, {...objProduct, quantity: 1}]
+        pedalsInCart = [...pedalsInCart, {...objProduct, quantity: 1}];
+        showMessageInModal(`The product ${objProduct.name} was added to the shopping cart`)
     }
     //actualizamos el carrito
     updateShoppingCartInfo(pedalsInCart);
@@ -480,6 +481,16 @@ function confirmPurchase(){
     }
 }
 
+/* Gestion de mensajes */
+
+function showMessageInModal(msg){
+    modal.classList.add("show-modal");
+    modal.textContent = msg;
+    setTimeout(function(){
+        modal.classList.remove("show-modal")
+    },1500);
+}
+
 /* Funcion inicializadora */
 
 function init(){
@@ -496,11 +507,13 @@ function init(){
     barsMenuBtn.addEventListener("click", toggleNavbarList);
     window.addEventListener("scroll", closeOpenWindows);
     navbarList.addEventListener("click", toggleNavbarList);
-    userIcon.addEventListener("click", function(){window.location.href="./login.html"});
+    signInMenuBtn.addEventListener("click", function(){window.location.href="./login.html"});
+    signUpMenuBtn.addEventListener("click", function(){window.location.href="./signup.html"});
     shoppingCartBtn.addEventListener("click", toggleShoppingCart);
     cartExitBtn.addEventListener("click", toggleShoppingCart);
     deleteAllProductsBtn.addEventListener("click", deleteAllProductsFromShoppingCart);
-    confirmPurchaseBtn.addEventListener("click", confirmPurchase)
+    confirmPurchaseBtn.addEventListener("click", confirmPurchase);
+    shoppingCartBg.addEventListener("click", closeShoppingCart);
 
 
     categoryContainer.addEventListener("click", selectCategory);

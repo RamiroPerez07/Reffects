@@ -48,7 +48,7 @@ function checkPasswordInput(){
     if(isEmpty(inputValue)){
         showErrorMessage(passwordInput, "Password cannot be empty");
     }else if (!isPasswordValid(inputValue)){
-        showErrorMessage(passwordInput, "Looks like this is not a valid password");
+        showErrorMessage(passwordInput, "The password must have a minimum of eight characters, at least one letter and one number");
     }else{
         showSuccessMessage(passwordInput)
         valid=true;
