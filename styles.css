@@ -409,6 +409,7 @@ h1{
 /* Product list section */
 
 #products-section{
+    max-width: 1350px;
     display: grid;
     padding: 20px;
     max-height: none;
@@ -471,13 +472,14 @@ h2{
 
 #products-container{
     width: 100%;
+    max-width: 1200px;
     height: auto;
     min-height: 400px;
     display: grid;
     align-items: start;
     justify-items: center;
     grid-auto-rows: min-content;
-    gap: 20px;
+    gap: 40px 20px;
     grid-template-columns: repeat(3, 1fr);
 }
 
@@ -1128,6 +1130,10 @@ h2{
 /* Media Queries */
 
 @media (max-width: 1250px){
+    *{
+        font-size: 16px;
+    }
+
     #hero{
         grid-template-columns: 1fr;
     }
