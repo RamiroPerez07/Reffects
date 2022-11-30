@@ -1077,10 +1077,11 @@ h2{
 
 .message-modal{
     width: 95%;
-    height: 40px;
+    height: 50px;
+    padding: 5px;
     background-color: #469247;
     position: fixed;
-    bottom: -40px;
+    bottom: -50px;
     font-size: var(--fs-small1);
     font-weight: var(--fw-normal);
     text-align: center;
