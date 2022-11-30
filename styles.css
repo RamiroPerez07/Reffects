@@ -1132,7 +1132,7 @@ h2{
 
 /* Media Queries */
 
-@media (min-width: 1700px){
+@media (min-width: 1800px){
     *{
         font-size: 26px;
     }
