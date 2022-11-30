@@ -967,11 +967,12 @@ h2{
 .user-form-window-frame{
     width: 90%;
     max-width: 400px;
-    height: 500px;
+    height: auto;
+    min-height: 500px;
     background-color: var(--white);
     box-shadow: 0px 0px 3px -1px var(--black);
     border-radius: 8px;
-    padding: 20px;
+    padding: 30px 20px;
     display: grid;
     align-items: start;
     justify-items: center;
@@ -982,10 +983,17 @@ h2{
 .user-icon{
     width: 200px ;
     height: 200px ;
-    background-image: url('./img/utils/user.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+#signin-icon{
+    background-image: url('./img/utils/user.png');
+}
+
+#signup-icon{
+    background-image: url('./img/utils/signup.png');
 }
 
 .user-form{
