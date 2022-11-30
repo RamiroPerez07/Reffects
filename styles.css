@@ -169,7 +169,8 @@ li{
     position: sticky;
     top: 0px;
     z-index: 5;
-    background: linear-gradient(45deg, var(--darkRed), var(--black), var(--black));
+    /*background-color: var(--black);*/
+    background: linear-gradient(175deg, var(--darkRed), var(--black), var(--black));
     padding: 10px 60px;
 }
 
@@ -1346,7 +1347,8 @@ h2{
         left: 0px;
         width: 100vw;
         height: auto;
-        background: var(--darkRed);
+        background-color: var(--black);
+        /*background: linear-gradient(135deg, var(--darkRed),var(--black),var(--black),var(--black));*/
         z-index: -1;
         transition: all 0.2s ease;
         padding: 20px;
