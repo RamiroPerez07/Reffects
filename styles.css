@@ -469,7 +469,7 @@ h2{
 
 .category-name{
     font-size: var(--fs-small1);
-    color: var(--white);
+    color: var(--black);
     text-align: center;
     font-weight: var(--fw-normal);
 }
