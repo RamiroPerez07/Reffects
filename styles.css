@@ -19,11 +19,14 @@
 }
 
 :root{
-    --white: #FDFDFD;
+    --white: #ffffff; /*white*/
     --red: #C30F24;
     --darkRed: #97152d;
-    --black: #040102;
-    --grey: #c9bcbe;
+    --black: #010101;
+    --bgWhite: #edf2f4;
+    --grey: #d3d3d3;
+    --btnBgColor: #F48C06;
+    --terciary: #14213d;
     --black90: #04010227;
     --black10: #04010210;
 
@@ -62,7 +65,7 @@ body{
     display: grid;
     justify-items: center;
     align-items: start;
-    background: linear-gradient(45deg, var(--white), var(--grey));
+    background: linear-gradient(45deg, var(--bgWhite), var(--grey));
     position: relative;
 }
 
@@ -76,9 +79,9 @@ li{
 }
 
 .btn-style-dark{
-    background-color: var(--darkRed);
+    background-color: var(--btnBgColor);
     font-weight: var(--fw-normal);
-    color: var(--grey);
+    color: var(--white);
     padding: 10px 20px;
     border-radius: 7px;
     border: none;
@@ -86,19 +89,19 @@ li{
 }
 
 .btn-style-dark:hover{
-    filter:brightness(1.5);
+    filter:brightness(1.2);
 }
 
 .btn-dark-disabled{
-    filter: grayscale(90%);
+    filter: grayscale(95%);
 }
 
 .btn-dark-disabled:hover{
-    filter: grayscale(90%);
+    filter: grayscale(95%);
 }
 
 .gradient-text{
-    background: linear-gradient(to top, var(--darkRed),var(--black));
+    background: linear-gradient(to top, var(--terciary),var(--black));
     -webkit-background-clip: text;
     color: transparent;  
 }
@@ -106,10 +109,10 @@ li{
 .btn-style-light{
     background-color: var(--white);
     font-weight: var(--fw-normal);
-    color: var(--darkRed);
+    color: var(--black);
     padding: 8px 12px;
     border-radius: 10px;
-    border: 1px solid var(--darkRed);
+    border: 1px solid var(--black);
     cursor: pointer;
 }
 
@@ -169,8 +172,8 @@ li{
     position: sticky;
     top: 0px;
     z-index: 5;
-    /*background-color: var(--black);*/
-    background: linear-gradient(175deg, var(--darkRed), var(--black), var(--black));
+    background-color: var(--black);
+    /*background: linear-gradient(175deg, var(--darkRed), var(--black), var(--black));*/
     padding: 10px 60px;
 }
 
@@ -440,7 +443,7 @@ h2{
 .category-card{
     width:110px;
     height: 110px;
-    background-color: var(--darkRed);
+    background-color: var(--terciary);
     cursor: pointer;
     display: grid;
     gap: 10px;
@@ -499,8 +502,8 @@ h2{
     position: relative;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    background: linear-gradient(45deg, var(--white), var(--grey));
-    box-shadow: 0px 0px 2px -1px var(--black);
+    background: linear-gradient(45deg, var(--bgWhite), var(--grey));
+    box-shadow: 0px 0px 3px -1px var(--black);
 }
 
 .shipping-img{
@@ -556,7 +559,7 @@ h2{
     width: 100%;
     min-height: 180px;
     height: auto;
-    background-color: var(--black90);
+    background-color: var(--grey);
     padding: 15px;
     display: grid;
     grid-auto-rows: min-content;
@@ -657,7 +660,7 @@ h2{
 
 .separator{
     width: 100%;
-    background-color: var(--black);
+    background-color: var(--terciary);
     height: 1px;
     filter: contrast(5%);
 }
@@ -967,7 +970,7 @@ h2{
     width: 100%;
     height: auto;
     min-height: min(1080px, 100vh); /* Limite en los 1080 pixeles */
-    background: linear-gradient(45deg, var(--darkRed), var(--black));
+    background: linear-gradient(45deg, var(--terciary), var(--black));
     display: grid;
     align-items: start;
     justify-items: center;
@@ -1056,9 +1059,9 @@ h2{
     padding: 7px 10px;
     font-size: var(--fs-medium0);
     font-weight: var(--fw-normal);
-    color: var(--darkRed);
+    color: var(--terciary);
     border: none;
-    border-bottom: 1px solid var(--darkRed);
+    border-bottom: 1px solid var(--black);
     text-align: center;
 }
 
@@ -1103,7 +1106,7 @@ h2{
 }
 
 .go-to-user-form-btn:hover{
-    color: var(--darkRed);
+    color: var(--terciary);
 }
 /* ------------------------------------------------*/
 
