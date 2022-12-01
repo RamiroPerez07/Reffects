@@ -1238,6 +1238,7 @@ h2{
     .user-icon{
         width: 130px;
         height: 130px;
+        margin-bottom: 20px;
     }
 
     .user-form{
