@@ -454,7 +454,7 @@ h2{
 }
 
 .category-card.selected{
-    background: var(--black);
+    background: var(--btnBgColor);
 }
 
 .category-img{
