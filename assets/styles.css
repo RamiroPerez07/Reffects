@@ -778,13 +778,53 @@ h2{
     width: 100%;
     height: auto;
     min-height: 45px;
-    padding: 10px 20px;
+    padding: 30px 20px;
     background-color: var(--black);
     display: grid;
     place-items: center;
 }
 
+.footer-topic-container{
+    width: 95%;
+    max-width: 1300px;
+    min-height: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: center;
+    align-items: start;
+}
+
+.topic{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: center;
+    align-items: start;
+    width: 95%;
+    max-width: 200px;
+}
+
+.footer-topic-title{
+    width: 90%;
+    padding-bottom: 10px;
+    color: var(--bgWhite);
+    font-size: var(--fs-small1);
+    font-weight: var(--fw-bold);
+    text-align: center;
+    border-bottom: 1px solid var(--bgWhite);
+}
+
+.footer-links{
+    color: var(--bgWhite);
+    font-weight: var(--fw-normal);
+    font-size: var(--fs-small1);
+    text-align: center;
+}
+
+
 .sign{
+    margin-top: 45px;
     font-size: var(--fs-small0);
     font-weight: var(--fw-light);
     color: var(--grey);
@@ -803,6 +843,8 @@ h2{
 .message-modal{
     display: none;
 }
+
+
 
 /* ----------------------------------------------- */
 /* Shoping Cart */
@@ -1057,7 +1099,7 @@ h2{
     gap: 12px;
     justify-items: center;
     align-items: start;
-    align-self: center;
+    align-self: start;
 }
 
 .contact-send-btn{
@@ -1554,6 +1596,11 @@ h2{
 
     .user-form-window-frame{
         align-self: start;
+    }
+
+    .footer-topic-container{
+        grid-template-columns: 1fr;
+        gap: 40px;
     }
 }
 
