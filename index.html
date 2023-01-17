@@ -25,6 +25,9 @@
                     <a href="#products-section">Fx Pedals</a>
                 </li>
                 <li class="list-item">
+                    <a href="#contact-section">Contact</a>
+                </li>
+                <li class="list-item">
                     <i id="signin-menu-icon" class="fas fa-sign-in-alt"></i>
                 </li>
                 <li class="list-item">
@@ -129,6 +132,26 @@
             </div>
         </section>
 
+        <!-- Contact Section-->
+        <section id="contact-section" class="main-subsection">
+            <h2 id="contact-section-title" class="main-section-title">Contact</h2>
+            <form id="contact-form" novalidate>
+                <div class="form-field">
+                    <input class="contact-input" type="text" name="name-input" id="name-input" placeholder="Enter your full name">
+                    <small class="user-error-msg"></small>
+                </div>
+                <div class="form-field">
+                    <input class="contact-input" type="email" name="email-input" id="email-input" placeholder="Enter your email">
+                    <small class="user-error-msg"></small>
+                </div>
+                <div class="form-field">
+                    <textarea class="contact-text" id="contact-text-input" placeholder="Enter your message here"></textarea>
+                    <small class="user-error-msg"></small>
+                </div>
+                <button class="btn-style-dark contact-send-btn">Send</button>
+            </form>
+        </section>
+
     </main>
     <footer id="body-footer">
         <p class="sign">Coded by <a href="https://github.com/RamiroPerez07">Ramiro Perez</a></p>
@@ -140,5 +163,7 @@
     <script src="./assets/data.js"></script>
     <!-- Custom JS -->
     <script src="./assets/index.js"></script>
+    <!-- Contact JS -->
+    <script src="./assets/contact.js"></script>
 </body>
 </html>

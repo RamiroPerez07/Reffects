@@ -81,8 +81,8 @@ function createHtmlProductCard(objProduct){
     const {id, name, brand, fxs, description, url_img, price, free_shipping, stock} = objProduct;
     return `
     <div class="product-card">
-        ${free_shipping?`<div class="shipping-img" style="background-image: url('./img/utils/free-shipping.png')"></div>`:""}
-        ${stock==0?`<div class="out-of-stock-img" style="background-image: url('./img/utils/out-of-stock.png')"></div>`:""}
+        ${free_shipping?`<div class="shipping-img" style="background-image: url('./assets/img/utils/free-shipping.png')"></div>`:""}
+        ${stock==0?`<div class="out-of-stock-img" style="background-image: url('./assets/img/utils/out-of-stock.png')"></div>`:""}
         <div class="product-img" style="background-image: url('${url_img}')"></div>
         <div class="product-info">
             <h3 class="product-name gradient-text">${name}</h3>
@@ -92,7 +92,7 @@ function createHtmlProductCard(objProduct){
             </div>
             <div class="description-toggle show-product-description">
                 <p class="description-title show-product-description">Description</p>
-                <div class="icon-arrow-down show-product-description" style="background-image: url('./img/utils/icon-arrow-down.svg')"></div>
+                <div class="icon-arrow-down show-product-description" style="background-image: url('./assets/img/utils/icon-arrow-down.svg')"></div>
             </div>
             <p class="product-description">${description}</p>
             <div class="separator"></div>

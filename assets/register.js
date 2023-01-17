@@ -35,7 +35,7 @@ function checkEmailInput(){
     let valid = false;
     const inputValue = emailInput.value.trim();
     if(isEmpty(inputValue)){
-        showErrorMessage(emailInput, "Password cannot be empty");
+        showErrorMessage(emailInput, "Email cannot be empty");
     }else if (!isEmailValid(inputValue)){
         showErrorMessage(emailInput, "Looks like this is not a valid email");
     }else{
