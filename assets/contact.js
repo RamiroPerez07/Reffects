@@ -65,6 +65,10 @@ function showErrorMessage(input, msg){
     input.classList.add("inputError");
     const msgText = formField.querySelector("small");
     msgText.textContent = msg;
+    setTimeout(()=>{
+        input.classList.remove("inputError")
+        msgText.textContent = ""
+    },3000)
 }
 
 function isEmpty(inputValue){
@@ -76,7 +80,6 @@ function sendInfo(event){
     event.preventDefault();
     if (isFormValid()){
         userForm.reset();
-        window.location.href = "./index.html";
         alert("Thanks for contact us. We will reply to you as soon as possible!")
     }
 }
