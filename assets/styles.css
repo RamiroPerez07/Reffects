@@ -1054,7 +1054,7 @@ h2{
     padding: 20px 0px;
     display: grid;
     grid-auto-rows: min-content;
-    gap: 20px;
+    gap: 12px;
     justify-items: center;
     align-items: start;
     align-self: center;
