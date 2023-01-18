@@ -13,78 +13,79 @@
 </head>
 <body>
     <!--#####################################-->
-
-    <header id="body-header">
-        <div id="header-logo"></div>
-        <nav id="navbar">
-            <ul id="navbar-list">
-                <li class="list-item">
-                    <a href="#hero">Home</a>
-                </li>
-                <li class="list-item">
-                    <a href="#products-section">Fx Pedals</a>
-                </li>
-                <li class="list-item">
-                    <a href="#contact-section">Contact</a>
-                </li>
-                <li class="list-item">
-                    <i id="signin-menu-icon" class="fas fa-sign-in-alt"></i>
-                </li>
-                <li class="list-item">
-                    <i id="signup-menu-icon" class="fas fa-user-plus" aria-hidden="true"></i>
-                </li>
-            </ul>
-            <i id="shopping-cart-icon" class="fa-sharp fa-solid fa-cart-shopping"><div id="shopping-cart-counter"></div></i>
-            <div id="bars-menu-btn">
-                <div></div>
-                <div></div>
-                <div></div>
+    <div id="header-overflow">
+        <header id="body-header">
+            <div id="header-logo"></div>
+            <nav id="navbar">
+                <ul id="navbar-list">
+                    <li class="list-item">
+                        <a href="#hero">Home</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#products-section">Fx Pedals</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="#contact-section">Contact</a>
+                    </li>
+                    <li class="list-item">
+                        <i id="signin-menu-icon" class="fas fa-sign-in-alt"></i>
+                    </li>
+                    <li class="list-item">
+                        <i id="signup-menu-icon" class="fas fa-user-plus" aria-hidden="true"></i>
+                    </li>
+                </ul>
+                <i id="shopping-cart-icon" class="fa-sharp fa-solid fa-cart-shopping"><div id="shopping-cart-counter"></div></i>
+                <div id="bars-menu-btn">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+    
+            <!--########### Shopping Cart ###########-->
+            <div class="cart-frame" id="shopping-cart">
+                <div class="exit-btn" id="cart-exit-btn">
+    
+                </div>
+                <h2 class="cart-title">Your Products</h2>
+                <div id="cart-products-container">
+                    <!-- Template cards -->
+                    <!--<div class="cart-product-card">
+                        <div class="cart-product-img"></div>
+                        <h3 class="cart-product-name gradient-text">Lorem, ipsum dolor.</h3>
+                        <span class="cart-product-brand">Lorem.</span>
+                        <span class="cart-product-price">$ 45000</span>
+                        <button class="exit-btn quit-product-btn"></button>
+                        <div class="quantity-manage-box">
+                            <button class="decrease-quantity-btn btn-style-dark quantity-btn">-</button>
+                            <span class="quantity-product-label">2</span>
+                            <button class="increase-quantity-btn btn-style-dark quantity-btn">+</button>
+                        </div>
+                    </div>-->
+                    <!--···············-->
+                </div>
+                <div class="subtotal-container">
+                    <p class="subtotal-label">Subtotal</p>
+                    <span class="subtotal-amount" id="subtotal-amount"></span>
+                    <p class="subtotal-label">Shipping</p>
+                    <span class="subtotal-amount" id="shipping-amount"></span>
+                </div>
+                <div class="separator separator-style2">
+    
+                </div>
+                <div class="total-container">
+                    <p class="total-label">Total</p>
+                    <span class="total-amount gradient-text" id="total-amount"></span>
+                </div>
+                <div class="btn-container">
+                    <button class="btn-style-dark" id="confirm-purchase-btn">Comprar</button>
+                    <button class="btn-style-light" id="delete-all-products-btn">Delete All</button>
+                </div>
             </div>
-        </nav>
-
-        <!--########### Shopping Cart ###########-->
-        <div class="cart-frame" id="shopping-cart">
-            <div class="exit-btn" id="cart-exit-btn">
-
-            </div>
-            <h2 class="cart-title">Your Products</h2>
-            <div id="cart-products-container">
-                <!-- Template cards -->
-                <!--<div class="cart-product-card">
-                    <div class="cart-product-img"></div>
-                    <h3 class="cart-product-name gradient-text">Lorem, ipsum dolor.</h3>
-                    <span class="cart-product-brand">Lorem.</span>
-                    <span class="cart-product-price">$ 45000</span>
-                    <button class="exit-btn quit-product-btn"></button>
-                    <div class="quantity-manage-box">
-                        <button class="decrease-quantity-btn btn-style-dark quantity-btn">-</button>
-                        <span class="quantity-product-label">2</span>
-                        <button class="increase-quantity-btn btn-style-dark quantity-btn">+</button>
-                    </div>
-                </div>-->
-                <!--···············-->
-            </div>
-            <div class="subtotal-container">
-                <p class="subtotal-label">Subtotal</p>
-                <span class="subtotal-amount" id="subtotal-amount"></span>
-                <p class="subtotal-label">Shipping</p>
-                <span class="subtotal-amount" id="shipping-amount"></span>
-            </div>
-            <div class="separator separator-style2">
-
-            </div>
-            <div class="total-container">
-                <p class="total-label">Total</p>
-                <span class="total-amount gradient-text" id="total-amount"></span>
-            </div>
-            <div class="btn-container">
-                <button class="btn-style-dark" id="confirm-purchase-btn">Comprar</button>
-                <button class="btn-style-light" id="delete-all-products-btn">Delete All</button>
-            </div>
-        </div>
-        <!-- Overlay -->
-        <div id="shopping-cart-bg" class="blur-bg"></div>
-    </header>
+            <!-- Overlay -->
+            <div id="shopping-cart-bg" class="blur-bg"></div>
+        </header>
+    </div>
     <main id="main">
 
         <!-- Hero Section -->

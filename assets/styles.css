@@ -59,7 +59,7 @@ html{
 
 body{
     width: 100%;
-    max-width: 1980px; /* Max res */
+    /*max-width: 1980px;*/ /* Max res */
     height: auto;
     min-height: 100vh;
     display: grid;
@@ -161,21 +161,32 @@ li{
 
 /* Element's specific styles */
 
+#header-overflow{
+    width: 100%;
+    min-height: 50px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+    background-color: var(--black);
+
+}
+
 #body-header{
     width: 100%;
-    height: auto;
+    max-width: 1980px;
     min-height: 50px;
     display: grid;
     justify-items: center;
     align-items: center;
     grid-template-columns: 100px 1fr;
-    position: sticky;
-    top: 0px;
-    z-index: 5;
-    background-color: var(--black);
-    /*background: linear-gradient(175deg, var(--darkRed), var(--black), var(--black));*/
     padding: 10px 60px;
+    /*background: linear-gradient(175deg, var(--darkRed), var(--black), var(--black));*/
 }
+
+
 
 #header-logo{
     width: 45px;
@@ -337,6 +348,7 @@ li{
 
 #main{
     width: 100%;
+    max-width: 1980px;
     height: auto;
     min-height: calc(100vh - 60px);
     padding: 0px 20px;
@@ -1196,11 +1208,15 @@ h2{
 /* ----------------------------------------------- */
 /* Sign In Section */
 
+.dark-window{
+    background: linear-gradient(45deg, var(--terciary), var(--black));
+}
+
 .frame-container{
     width: 100%;
     height: auto;
     min-height: min(1080px, 100vh); /* Limite en los 1080 pixeles */
-    background: linear-gradient(45deg, var(--terciary), var(--black));
+    /*background: linear-gradient(45deg, var(--terciary), var(--black));*/
     display: grid;
     align-items: start;
     justify-items: center;
